@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1, 
+        "name": "knitting socks",
+        "materials": "yarn, needles", 
+        "sources": "online course",
+        "budget": "$10", 
+        "inspiration": "my grandma's socks"
+    }, 
+    {
+        "id": 2, 
+        "name": "growing tomatoes",
+        "materials": "soils, seeds, pots, fertilizer", 
+        "sources": "online course",
+        "budget": "$50", 
+        "inspiration": "gardening group on Facebook"
+    }
+]
