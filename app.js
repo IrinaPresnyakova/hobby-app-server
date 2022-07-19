@@ -2,15 +2,13 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan')
 
-let currentProjects = require ('./data/currentProjects.json');
+// let currentProjects = require ('./data/currentProjects.json');
+let currentProjects = require ('./routes/current');
 let archivedProjects = require('./data/archivedProjects.json')
 let bucketListProjects = require('./data/bucketListProjects.json')
 
-// with middleware
-// app.use(logger) //it envokes logger middleware for any route. Must be above app.get that uses it
-// app.use('/api', logger) //or if add a path, will only apply to that route
-
 app.use(morgan('tiny'))
+app.use('/current', currentProjects)
 
 app.get('/', (req,res) => {
     res.send('<h1>Home Page</h1><a href="/current">Details on projects</a>')
@@ -22,13 +20,13 @@ app.get('/about', (req,res) => {
 
 // Current projects page
 
-app.get('/api/current', (req,res) => {
-    const briefProject = currentProjects.map((project) => {
-        const { id, name, image } = project
-        return { id, name, image }
-    })
-    res.json(briefProject)
-})
+// app.get('/api/current', (req,res) => {
+//     const briefProject = currentProjects.map((project) => {
+//         const { id, name, image } = project
+//         return { id, name, image }
+//     })
+//     res.json(briefProject)
+// })
 
 //get a single project using route parameters
 app.get('/api/current/:projectID', (req,res) => {
