@@ -1,92 +1,78 @@
 const express = require('express');
 const app = express();
-const morgan = require('morgan')
+const cors = require ('cors');
+require('dotenv').config()
+const { PORT } = process.env
 
 // let currentProjects = require ('./data/currentProjects.json');
 let currentProjects = require ('./routes/current');
-let archivedProjects = require('./data/archivedProjects.json')
-let bucketListProjects = require('./data/bucketListProjects.json')
+// let archivedProjects = require('./data/archivedProjects.json')
+// let bucketListProjects = require('./data/bucketListProjects.json')
+const home = require ('./routes/home')
+const about = require ('./routes/about')
 
-app.use(morgan('tiny'))
+app.use(express.json());
+app.use(cors());
+
 app.use('/current', currentProjects)
+// app.use('/', home)
+// app.use('/about', about)
 
-app.get('/', (req,res) => {
-    res.send('<h1>Home Page</h1><a href="/current">Details on projects</a>')
-})
 
-app.get('/about', (req,res) => {
-    res.send ('About')
-})
+// //get a single project using route parameters
+// app.get('/current/:projectID', (req,res) => {
+//     console.log(req.params);
+//     const { projectID } = req.params;
+//     const singleProject = currentProjects.find((project) => project.id === Number (projectID)) // just === productID if it's a string
+//     if (!singleProject) {
+//         return res.status(404).send('Project does not exist')
+//     }
 
-// Current projects page
-
-// app.get('/api/current', (req,res) => {
-//     const briefProject = currentProjects.map((project) => {
-//         const { id, name, image } = project
-//         return { id, name, image }
-//     })
-//     res.json(briefProject)
+//     res.json(singleProject)
 // })
 
-//get a single project using route parameters
-app.get('/api/current/:projectID', (req,res) => {
-    // console.log(req.params);
-    const { projectID } = req.params;
-    const singleProject = currentProjects.find((project) => project.id === Number (projectID)) // just === productID if it's a string
-    if (!singleProject) {
-        return res.status(404).send('Project does not exist')
-    }
+// // Get a list of all archived:
+// app.get('/archived', (req,res) => {
+//     res.status(200).json({success:true, data:archivedProjects})
+// })
 
-    res.json(singleProject)
-})
+// //get a single archived project:
 
-// Get a list of all archived:
-app.get('/api/archived', (req,res) => {
-    res.status(200).json({success:true, data:archivedProjects})
-})
+// app.get('/archived/:projectID', (req,res) => {
+//     // console.log(req.params);
+//     const { projectID } = req.params;
+//     const singleArchivedProject = archivedProjects.find((project) => project.id === Number (projectID)) // just === productID if it's a string
+//     if (!singleArchivedProject) {
+//         return res.status(404).send('Project does not exist')
+//     }
+//     res.json(singleArchivedProject)
+// })
 
-//get a single archived project:
+// // Get a list of bucket list projects
+// app.get('/bucket-list', (req,res) => {
+//     res.status(200).json({success:true, data:bucketListProjects})
+// })
 
-app.get('/api/archived/:projectID', (req,res) => {
-    // console.log(req.params);
-    const { projectID } = req.params;
-    const singleArchivedProject = archivedProjects.find((project) => project.id === Number (projectID)) // just === productID if it's a string
-    if (!singleArchivedProject) {
-        return res.status(404).send('Project does not exist')
-    }
-    res.json(singleArchivedProject)
-})
-
-// Get a list of bucket list projects
-app.get('/api/bucket-list', (req,res) => {
-    res.status(200).json({success:true, data:bucketListProjects})
-})
-
-// get a single bucket list project
-app.get('/api/bucket-list/:projectID', (req,res) => {
-    // console.log(req.params);
-    const { projectID } = req.params;
-    const singleBucketList = archivedProjects.find((project) => project.id === Number (projectID)) // just === productID if it's a string
-    if (!singleBucketList) {
-        return res.status(404).send('Project does not exist')
-    }
-    res.json(singleBucketList)
-})
+// // get a single bucket list project
+// app.get('/bucket-list/:projectID', (req,res) => {
+//     // console.log(req.params);
+//     const { projectID } = req.params;
+//     const singleBucketList = archivedProjects.find((project) => project.id === Number (projectID)) // just === productID if it's a string
+//     if (!singleBucketList) {
+//         return res.status(404).send('Project does not exist')
+//     }
+//     res.json(singleBucketList)
+// })
 
 
 
 app.all('*', (req, res) => {
-    res.status(404).send('Page not found')
+    res.status(404).send('Page not found, try something else')
 })
 
 // app.post()
 
-
-
-
-
-
-app.listen(5500, ()=> {
+app.listen(PORT, ()=> {
     console.log("Server is listening on port 5500......");
 })
 

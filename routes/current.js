@@ -5,11 +5,13 @@ let currentProjects = require ('../data/currentProjects.json');
 // Current projects page
 
 router.get('/', (req,res) => {
+    
     const briefProject = currentProjects.map((project) => {
         const { id, name, image } = project
         return { id, name, image }
     })
     res.json(briefProject)
+    console.log(briefProject);
 })
 
 //get a single project using route parameters
