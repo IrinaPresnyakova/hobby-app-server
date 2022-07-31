@@ -1,6 +1,6 @@
 const express = require ('express')
 const router = express.Router()
-let currentProjects = require ('../data/currentProjects.json');
+// let currentProjects = require ('../data/currentProjects.json');
 
 // Current projects page
 

@@ -4,17 +4,22 @@ const cors = require ('cors');
 require('dotenv').config()
 const { PORT } = process.env
 
-// let currentProjects = require ('./data/currentProjects.json');
 let currentProjects = require ('./routes/current');
-// let archivedProjects = require('./data/archivedProjects.json')
-// let bucketListProjects = require('./data/bucketListProjects.json')
 const home = require ('./routes/home')
 const about = require ('./routes/about')
 
 app.use(express.json());
 app.use(cors());
 
-app.use('/current', currentProjects)
+const db = require('./models')
+
+db.sequelize.sync().then(()=> {
+    app.listen(PORT, () => {
+        console.log("Server is running on port 5500");
+    });
+});
+
+// app.use('/current', currentProjects)
 // app.use('/', home)
 // app.use('/about', about)
 
@@ -66,15 +71,12 @@ app.use('/current', currentProjects)
 
 
 
-app.all('*', (req, res) => {
-    res.status(404).send('Page not found, try something else')
-})
+// app.all('*', (req, res) => {
+//     res.status(404).send('Page not found, try something else')
+// })
 
 // app.post()
 
-app.listen(PORT, ()=> {
-    console.log("Server is listening on port 5500......");
-})
 
 
 
