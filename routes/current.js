@@ -13,9 +13,6 @@ router.post('/', async (req, res) => {
     const postProject = req.body;
     await Projects.create(postProject);
     res.json(postProject);
-
-
-
 })
 //get a single project using route parameters
 // router.get('/:projectID', (req,res) => {
