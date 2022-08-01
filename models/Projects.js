@@ -1,3 +1,5 @@
+// the following created  a table in the database
+
 module.exports = (sequelize, DataTypes) => {
 
     const Projects = sequelize.define("Projects", {

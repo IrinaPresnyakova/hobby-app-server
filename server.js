@@ -3,15 +3,15 @@ const app = express();
 const cors = require ('cors');
 require('dotenv').config()
 const { PORT } = process.env
-
-let currentProjects = require ('./routes/current');
-const home = require ('./routes/home')
-const about = require ('./routes/about')
-
 app.use(express.json());
 app.use(cors());
-
 const db = require('./models')
+
+//Routers
+const projectsRouter = require ('./routes/current');
+app.use('/current', projectsRouter)
+
+
 
 db.sequelize.sync().then(()=> {
     app.listen(PORT, () => {
@@ -19,7 +19,7 @@ db.sequelize.sync().then(()=> {
     });
 });
 
-// app.use('/current', currentProjects)
+
 // app.use('/', home)
 // app.use('/about', about)
 

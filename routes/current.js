@@ -1,19 +1,22 @@
-const express = require ('express')
-const router = express.Router()
-// let currentProjects = require ('../data/currentProjects.json');
+const express = require ('express');
+const router = express.Router();
+const { Projects } = require('../models'); //Projects refers to an instance of the model Projects.js
 
 // Current projects page
 
-router.get('/', (req,res) => {
-    
-    const briefProject = currentProjects.map((project) => {
-        const { id, name, image } = project
-        return { id, name, image }
-    })
-    res.json(briefProject)
-    console.log(briefProject);
+router.get('/', async (req, res) => {
+    const listOfProjects = await Projects.findAll(); 
+    res.json(listOfProjects); 
 })
 
+router.post('/', async (req, res) => {
+    const postProject = req.body;
+    await Projects.create(postProject);
+    res.json(postProject);
+
+
+
+})
 //get a single project using route parameters
 // router.get('/:projectID', (req,res) => {
 //     // console.log(req.params);
@@ -26,8 +29,7 @@ router.get('/', (req,res) => {
 //     res.json(singleProject)
 // })
 
-// add a new project to current
-// app.post
+
 
 module.exports = router
 
