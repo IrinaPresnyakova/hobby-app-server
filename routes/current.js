@@ -9,6 +9,14 @@ router.get('/', async (req, res) => {
     res.json(listOfProjects); 
 })
 
+router.get('/project/:id', async (req, res) => {
+    const id = req.params.id
+    const project = await Projects.findByPk(id) 
+    res.json(project)
+})
+
+
+
 router.post('/', async (req, res) => {
     const postProject = req.body;
     await Projects.create(postProject);
