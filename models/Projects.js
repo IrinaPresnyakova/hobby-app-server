@@ -40,5 +40,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
         }
     });
+
+    Projects.associate = (models) => {
+        Projects.hasMany(models.Steps, {
+            onDelete: "cascade",
+        })
+    }
     return Projects;
 }
