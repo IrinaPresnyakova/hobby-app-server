@@ -10,7 +10,10 @@ const db = require('./models')
 //Routers
 const projectsRouter = require ('./routes/current');
 app.use('/current', projectsRouter)
-
+const stepsRouter = require ('./routes/steps');
+app.use('/steps', stepsRouter)
+const notesRouter = require ('./routes/notes')
+app.use('/notes', notesRouter)
 
 
 db.sequelize.sync().then(()=> {

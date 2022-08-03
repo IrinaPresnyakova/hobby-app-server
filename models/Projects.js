@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Projects.associate = (models) => {
-        Projects.hasMany(models.Steps, {
+        Projects.hasMany(models.Notes, {
             onDelete: "cascade",
         })
     }
