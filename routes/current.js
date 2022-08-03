@@ -3,37 +3,18 @@ const router = express.Router();
 const { Projects } = require('../models'); //Projects refers to an instance of the model Projects.js
 
 // Current projects page
-
+// all projects show on /current page
 router.get('/', async (req, res) => {
     const listOfProjects = await Projects.findAll(); 
     res.json(listOfProjects); 
 })
 
-router.get('/project/:id', async (req, res) => {
-    const id = req.params.id
-    const project = await Projects.findByPk(id) 
-    res.json(project)
-})
-
-
-
+// posting is done from /current page 
 router.post('/', async (req, res) => {
     const postProject = req.body;
     await Projects.create(postProject);
     res.json(postProject);
 })
-//get a single project using route parameters
-// router.get('/:projectID', (req,res) => {
-//     // console.log(req.params);
-//     const { projectID } = req.params;
-//     const singleProject = currentProjects.find((project) => project.id === Number (projectID)) // just === productID if it's a string
-//     if (!singleProject) {
-//         return res.status(404).send('Project does not exist')
-//     }
-
-//     res.json(singleProject)
-// })
-
 
 
 module.exports = router
