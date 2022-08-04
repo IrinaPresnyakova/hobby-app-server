@@ -12,9 +12,9 @@ router.get('/:id', async (req, res) => {
 
 // // deleting is done from /projects/:id
 router.delete('/:projectId', async (req, res) => {
-    const id = req.params.projectId;
+    const projectId = req.params.projectId;
     await Projects.destroy({
-        where: {id: id}
+        where: {id: projectId}
     });
     res.send("This project was deleted")
 })
