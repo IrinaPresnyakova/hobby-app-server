@@ -16,6 +16,6 @@ router.post('/', async (req, res) => {
     res.json(note)
 })
 
-// router.delete("/noteId")
+
 
 module.exports = router

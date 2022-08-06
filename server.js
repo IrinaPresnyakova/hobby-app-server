@@ -14,7 +14,8 @@ const notesRouter = require ('./routes/notes')
 app.use('/notes', notesRouter)
 const projectRouter = require ('./routes/projects')
 app.use('/projects', projectRouter)
-
+const archiveRouter = require ('./routes/archive')
+app.use('/archive', archiveRouter)
 
 db.sequelize.sync().then(()=> {
     app.listen(PORT, () => {
