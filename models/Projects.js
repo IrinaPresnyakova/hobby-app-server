@@ -40,8 +40,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
         },
         archived: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
+            type: DataTypes.STRING,
+            defaultValue: "active",
             allowNull: false
         }       
     });
