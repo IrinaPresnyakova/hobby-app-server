@@ -19,6 +19,17 @@ router.delete('/:projectId', async (req, res) => {
     res.send("This project was deleted")
 })
 
+router.patch('/:projectId', async (req, res) => {
+    const projectId = req.params.projectId;
+    await Projects.update(
+        {
+            archived: "archived"
+        },
+        {
+        where: {id: projectId}
+    });
+    res.send("This project was archived")
+})
 
 
 module.exports = router
