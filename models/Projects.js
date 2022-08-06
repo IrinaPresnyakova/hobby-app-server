@@ -38,7 +38,12 @@ module.exports = (sequelize, DataTypes) => {
         reflection: {
             type: DataTypes.TEXT, 
             allowNull: true,
-        }
+        },
+        archived: {
+            type: DataTypes.STRING,
+            defaultValue: "active",
+            allowNull: false
+        }       
     });
 
     Projects.associate = (models) => {
