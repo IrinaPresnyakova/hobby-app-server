@@ -1,7 +1,6 @@
 const express = require ('express');
 const router = express.Router();
 const { Projects } = require('../models'); //Projects refers to an instance of the model Projects.js
-const { v4: uuidv4 } = require('uuid')
 
 // Current projects page
 // all projects show on /current page

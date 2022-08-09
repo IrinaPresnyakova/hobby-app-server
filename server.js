@@ -7,6 +7,7 @@ app.use(express.json());
 app.use(cors());
 const db = require('./models')
 
+
 //Routers
 const currentRouter = require ('./routes/current');
 app.use('/current', currentRouter)
@@ -16,8 +17,10 @@ const projectRouter = require ('./routes/projects')
 app.use('/projects', projectRouter)
 const archiveRouter = require ('./routes/archive')
 app.use('/archive', archiveRouter)
+const singleArchRouter = require ('./routes/singleArchived')
+app.use('/archive-view', singleArchRouter)
 
-db.sequelize.sync().then(()=> {
+db.sequelize.sync({alter: true}).then(()=> {
     app.listen(PORT, () => {
         console.log("Server is running on port 5500");
     });

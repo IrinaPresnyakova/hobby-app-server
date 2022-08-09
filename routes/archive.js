@@ -16,16 +16,5 @@ router.get('/', async (req, res) => {
     res.json(listOfProjects); 
 })
 
-router.patch('/:projectId', async (req, res) => {
-    const projectId = req.params.projectId;
-    await Projects.update(
-        {
-            archived: "active"
-        },
-        {
-        where: {id: projectId}
-    });
-    res.send("This project was returned to current")
-})
 
 module.exports = router
