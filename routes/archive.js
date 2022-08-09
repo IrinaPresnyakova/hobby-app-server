@@ -9,10 +9,12 @@ router.get('/', async (req, res) => {
     const listOfProjects = await Projects.findAll({
         where: {'archived': 'archived'},
         attributes: [
+            'id',
             'title',
         ]}
     ); 
     res.json(listOfProjects); 
 })
+
 
 module.exports = router
