@@ -19,8 +19,10 @@ const archiveRouter = require ('./routes/archive')
 app.use('/archive', archiveRouter)
 const singleArchRouter = require ('./routes/singleArchived')
 app.use('/archive-view', singleArchRouter)
+const bucketListRouter = require ('./routes/bucket-list')
+app.use('/bucket-list', bucketListRouter)
 
-db.sequelize.sync({alter: true}).then(()=> {
+db.sequelize.sync().then(()=> {
     app.listen(PORT, () => {
         console.log("Server is running on port 5500");
     });
