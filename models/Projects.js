@@ -15,10 +15,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.TEXT,
             allowNull: true,
         },
-        notes: {
-            type: DataTypes.TEXT,
-            allowNull: true,
-        },
         materials: {
             type: DataTypes.TEXT,
             allowNull: false,
