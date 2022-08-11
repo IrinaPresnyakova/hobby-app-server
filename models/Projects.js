@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         materials: {
             type: DataTypes.TEXT,
-            allowNull: false,
+            allowNull: true,
         },
         budget: {
             type: DataTypes.FLOAT,
@@ -29,13 +29,18 @@ module.exports = (sequelize, DataTypes) => {
         },
         progress: {
             type: DataTypes.TEXT,
-            allowNull: false,
+            allowNull: true,
         },
         reflection: {
             type: DataTypes.TEXT, 
             allowNull: true,
         },
         archived: {
+            type: DataTypes.STRING,
+            defaultValue: "active",
+            allowNull: false
+        }, 
+        bucketList: {
             type: DataTypes.STRING,
             defaultValue: "active",
             allowNull: false
