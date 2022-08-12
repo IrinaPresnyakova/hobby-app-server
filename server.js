@@ -21,6 +21,8 @@ const singleArchRouter = require ('./routes/singleArchived')
 app.use('/archive-view', singleArchRouter)
 const bucketListRouter = require ('./routes/bucket-list')
 app.use('/bucket-list', bucketListRouter)
+const singleBucket = require ('./routes/singleBucket')
+app.use('/bucket-list-view', singleBucket)
 
 db.sequelize.sync().then(()=> {
     app.listen(PORT, () => {
