@@ -12,10 +12,12 @@ router.get('/:id', async (req, res) => {
 //Modify the data in the fields?
 router.patch('/:projectId', async (req, res) => {
     const projectId = req.params.projectId;
-    const { title } = req.body
+    const { title, materials, progress } = req.body
     await Projects.update(
         {
-            title: title
+            title: title,
+            materials: materials, 
+            progress: progress
         },
         {
         where: {id: projectId}
