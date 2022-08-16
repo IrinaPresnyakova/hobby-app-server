@@ -18,8 +18,4 @@ router.post('/', async (req, res) => {
     res.json(postProject);
 })
 
-//editing project: 
-// router.patch
-
-
 module.exports = router

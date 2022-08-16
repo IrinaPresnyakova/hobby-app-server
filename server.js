@@ -23,6 +23,8 @@ const bucketListRouter = require ('./routes/bucket-list')
 app.use('/bucket-list', bucketListRouter)
 const singleBucket = require ('./routes/singleBucket')
 app.use('/bucket-list-view', singleBucket)
+const edit = require ('./routes/edit')
+app.use('/edit-project', edit)
 
 db.sequelize.sync().then(()=> {
     app.listen(PORT, () => {
