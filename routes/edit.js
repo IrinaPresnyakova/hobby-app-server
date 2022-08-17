@@ -18,7 +18,6 @@ router.patch('/:projectId', async (req, res) => {
             title: title,
             materials: materials, 
             progress: progress,
-            archived: active
         },
         {
         where: {id: projectId}
