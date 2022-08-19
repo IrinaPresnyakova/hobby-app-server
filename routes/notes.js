@@ -1,6 +1,7 @@
 const express = require ('express');
 const router = express.Router();
 const { Notes } = require('../models'); 
+const { tokenValidator } = require('../middleware/Authenticate')
 
 router.get('/:projectId', async (req, res) => {
     const projectId = req.params.projectId
@@ -10,8 +11,10 @@ router.get('/:projectId', async (req, res) => {
     res.json(notes)
 });
  
-router.post('/', async (req, res) => {
+router.post('/', tokenValidator, async (req, res) => {
     const note = req.body;
+    const username = req.user.username;
+    note.username = username;
     await Notes.create(note);
     res.json(note)
 })

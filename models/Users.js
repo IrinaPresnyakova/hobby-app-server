@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
        
     });
 
-    // Users.associate = (models) => {
-    //     Users.hasMany(models.Projects, {
-    //         onDelete: "cascade",
-    //     })
-    // }
+    Users.associate = (models) => {
+        Users.hasMany(models.Projects, {
+            onDelete: "cascade",
+        })
+    }
     
     return Users;
 }

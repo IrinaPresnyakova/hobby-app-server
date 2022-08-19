@@ -28,7 +28,7 @@ app.use('/edit-project', edit)
 const usersRouter = require ('./routes/users')
 app.use('/auth', usersRouter)
 
-// {alter: true} to update columns in DB tables
+// {alter: true} to update DB tables
 db.sequelize.sync().then(()=> {
     app.listen(PORT, () => {
         console.log("Server is running on port 5500");

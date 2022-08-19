@@ -2,6 +2,8 @@ const express = require ('express');
 const router = express.Router();
 const { Users } = require('../models'); //Projects refers to an instance of the model Projects.js
 const bcrypt = require('bcrypt');
+const { sign } = require ('jsonwebtoken')
+const { tokenValidator } = require ('../middleware/Authenticate') 
 
 // Users page
 
@@ -31,12 +33,23 @@ router.post('/login', async(req, res) => {
         res.json({error: "User not found!"})
     };
     // If user exists, we will compare hash from the input password with the user.password from the table, also hash: 
-    bcrypt.compare(password, user.password).then((match) => {
+    bcrypt.compare(password, user.password).then(async(match) => {
         if (!match) {
-            res.json({error: "Password does not match username"});
+            res.json({ error: "Password does not match username" });
         }
-        res.json("Login successful")
+    //if the user successfully logged in, we can generate a token: 
+        const tokenForAccess = sign(
+            { username: user.username, id: user.id }, 
+            "secretkeytoaccess"
+            );
+    //now we need to not just show 'login successful' but pass the token to the front end: 
+        // res.json("Login successful")
+        res.json(tokenForAccess)
     })
+})
+
+router.get('/auth', tokenValidator, (req, res) => {
+    res.json(req.user)
 })
 
 module.exports = router;
