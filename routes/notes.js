@@ -19,6 +19,15 @@ router.post('/', tokenValidator, async (req, res) => {
     res.json(note)
 })
 
+router.delete('/:noteId', tokenValidator, async (req, res) => {
+    const noteId = req.params.noteId
+    Notes.destroy({where: {
+        id: noteId
+    },
+})
+}
+)
+
 
 
 module.exports = router
