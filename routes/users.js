@@ -44,11 +44,11 @@ router.post('/login', async(req, res) => {
             );
     //now we need to not just show 'login successful' but pass the token to the front end: 
         // res.json("Login successful")
-        res.json(tokenForAccess)
+        res.json({token: tokenForAccess, username: user.username, id: user.id})
     })
 })
 
-router.get('/auth', tokenValidator, (req, res) => {
+router.get('/verify', tokenValidator, (req, res) => {
     res.json(req.user)
 })
 
