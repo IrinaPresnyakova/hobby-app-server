@@ -1,6 +1,8 @@
 const express = require ('express');
 const router = express.Router();
 const { Projects } = require('../models'); //Projects refers to an instance of the model Projects.js
+const { tokenValidator } = require ('../middleware/Authenticate') 
+
 
 // Current projects page
 // all projects show on /current page
