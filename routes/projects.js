@@ -1,6 +1,7 @@
 const express = require ('express');
 const router = express.Router();
 const { Projects } = require('../models'); 
+const { tokenValidator } = require('../middleware/Authenticate')
 
 // single project shows on /projects/:id page
 router.get('/:id', async (req, res) => {
