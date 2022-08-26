@@ -15,7 +15,7 @@ app.use( express.urlencoded({extended: true, limit: '50mb'}))
 const currentRouter = require ('./routes/current');
 app.use('/current', currentRouter)
 const notesRouter = require ('./routes/notes')
-app.use('/notes', notesRouter)
+app.use('/projects/notes', notesRouter)
 const projectRouter = require ('./routes/projects')
 app.use('/projects', projectRouter)
 const archiveRouter = require ('./routes/archive')
