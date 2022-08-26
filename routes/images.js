@@ -8,6 +8,7 @@ const cors = require ('cors');
 app.use(json())
 app.use(cors());
 const cloudinary = require("../cloudinary/cloudinary")
+const { Images } = require('../models')
 
 // const BASE_URL = `https://api.cloudinary.com/v1_1/${process.env.CLOUD_NAME}/resources/image`
 
@@ -24,15 +25,19 @@ router.get('/', async (req, res) => {
         res.send(publicIds)
     })
 
-router.post('/', async(req, res) => {
+router.post('/:projectId', async(req, res) => {
     console.log(req.body);
     const {image} = req.body
+
     const uploadedImage = await cloudinary.uploader.upload(image, {
         upload_preset: "unsigned_upload"
     })
     res.json(uploadedImage)
+
+    // const imagePublicId = uploadedImage.public_id
+    // console.log(imagePublicId);
+    await Images.create(uploadedImage)
+    // res.json(uploadedImage)
 })
-
-
 
 module.exports = router
