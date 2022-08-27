@@ -8,7 +8,7 @@ const { tokenValidator } = require ('../middleware/Authenticate')
 // all projects show on /current page
 router.get('/', async (req, res) => {
     const listOfProjects = await Projects.findAll({
-        where: {'archived': 'active'}
+        where: {'archived' : 'active', "bucketList" : "active"}
     }); 
     res.json(listOfProjects); 
 })
