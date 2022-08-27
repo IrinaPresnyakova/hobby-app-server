@@ -7,7 +7,7 @@ const { tokenValidator } = require('../middleware/Authenticate')
 router.get('/:projectId', async (req, res) => {
     const projectId = req.params.projectId
     const notes = await Notes.findAll ({
-        where: { ProjectId: projectId}
+        where: { ProjectId: projectId }
     })
     res.json(notes)
 });

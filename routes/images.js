@@ -17,27 +17,31 @@ const { Images } = require('../models')
 //     Password: process.env.API_SECRET,
 // }
 
-router.get('/', async (req, res) => {    
-        const {resources} = await cloudinary.search
-            .expression('folder:hobby_app')
-            .execute();
-        const publicIds = resources.map( (file) => file.public_id);
-        res.send(publicIds)
+router.get('/:projectId', async (req, res) => {
+    const projectId = req.params.projectId
+    const imagesBackEnd = await Images.findAll ({
+        attributes: ["public_id"],
+        where: { 
+            ProjectId: projectId,
+         }
     })
+    const publicIds = imagesBackEnd.map( (file) => file.public_id);
+    res.send(publicIds)
+});
 
 router.post('/:projectId', async(req, res) => {
-    console.log(req.body);
+    const ProjectId = req.body.ProjectId;
     const {image} = req.body
-
     const uploadedImage = await cloudinary.uploader.upload(image, {
         upload_preset: "unsigned_upload"
     })
     res.json(uploadedImage)
 
-    // const imagePublicId = uploadedImage.public_id
-    // console.log(imagePublicId);
-    await Images.create(uploadedImage)
-    // res.json(uploadedImage)
+    const newImage = await Images.create(uploadedImage)
+    newImage.set({
+        ProjectId: ProjectId
+    })
+    await newImage.save();
 })
 
 module.exports = router

@@ -55,9 +55,9 @@ module.exports = (sequelize, DataTypes) => {
         Projects.hasMany(models.Notes, {
             onDelete: "cascade",
         })
-        // Projects.hasMany(models.Images, {
-        //     onDelete: "cascade",
-        // })
+        Projects.hasMany(models.Images, {
+            onDelete: "cascade",
+        })
     }
 
     return Projects;

@@ -31,7 +31,7 @@ app.use('/edit-project', edit)
 const usersRouter = require ('./routes/users')
 app.use('/auth', usersRouter)
 const imagesRouter = require ('./routes/images')
-app.use('/images', imagesRouter)
+app.use('/projects/images', imagesRouter)
 // {alter: true} to update DB tables
 db.sequelize.sync().then(()=> {
     app.listen(PORT, () => {
