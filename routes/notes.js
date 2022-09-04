@@ -27,6 +27,7 @@ router.post('/:projectId', tokenValidator, async (req, res) => {
     res.json(note)
 })
 
+
 router.delete('/:projectId/:id', async (req, res) => {
     const noteId = req.params.id;
     await Notes.destroy({

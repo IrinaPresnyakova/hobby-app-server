@@ -10,13 +10,7 @@ app.use(cors());
 const cloudinary = require("../cloudinary/cloudinary")
 const { Images } = require('../models')
 
-// const BASE_URL = `https://api.cloudinary.com/v1_1/${process.env.CLOUD_NAME}/resources/image`
-
-// const cloudAuth = {
-//     Username: process.env.API_KEY,
-//     Password: process.env.API_SECRET,
-// }
-
+//For rendering: get data from DB
 router.get('/:projectId', async (req, res) => {
     const projectId = req.params.projectId
     const imagesBackEnd = await Images.findAll ({
@@ -29,6 +23,14 @@ router.get('/:projectId', async (req, res) => {
     res.send(publicIds)
 });
 
+//get one image???
+router.get('/:projectId/:imageId', async(req, res) => {
+    const id = req.params.id;
+    const image = await Images.findByPk(id)
+    res.json(image)
+})
+
+//For uploading: send images to cloudinary + save data into the database
 router.post('/:projectId', async(req, res) => {
     const ProjectId = req.body.ProjectId;
     const {image} = req.body
@@ -42,6 +44,14 @@ router.post('/:projectId', async(req, res) => {
         ProjectId: ProjectId
     })
     await newImage.save();
+})
+
+//For deleting: needs to be 2 things: from DB and from Cloudinary
+router.delete('/:projectId/:id', async (req, res) => {
+    const imageId = req.params.id;
+    await Images.destroy({
+        where: {id: imageId}
+    })
 })
 
 module.exports = router
