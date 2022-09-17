@@ -18,6 +18,7 @@ router.post('/', async (req, res) => {
     const postProject = req.body;
     await Projects.create(postProject);
     res.json(postProject);
+    console.log("new project", postProject);
 })
 
 module.exports = router

@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
         noteText: {
             type: DataTypes.STRING,
             allowNull: false,
-        }, 
-        username: {
-            type: DataTypes.STRING,
-            allowNull: false
         }
+        // username: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false
+        // }
     });
     
     return Notes;
